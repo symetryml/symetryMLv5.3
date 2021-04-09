@@ -5302,10 +5302,11 @@ POST /symetry/rest/{cid}/projects/{pid}/autoSelect/{dsid} [body=MLContext]
 ==== HTTP Responses
 
 [width="100%", cols="<25%,<25%,<50%",options="header",]
-|==================================================
 |HTTP Status Code |HTTP Status Message |Description
-|200 |OK |Success.
-|==================================================
+|202 | OK | Job accepted.
+|400 | BAD REQUEST | Unknown SymetryML project.
+`{"statusCode":"BAD_REQUEST","statusString":" +
+Cannot Find SYMETRYML id[r2] for Customer id [c1]","values":{}}`
 
 [[auto-select-example]]
 ==== Sample Request Response Classifier
