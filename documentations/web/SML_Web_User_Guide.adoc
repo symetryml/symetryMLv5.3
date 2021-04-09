@@ -403,8 +403,8 @@ image::media/web/webUI_selectNumberOfGPU.png[title='Select Number of GPU', width
 
 Available if the environment is GPU enabled. Reserved for the widest possible datasets.
 Multi-GPU projects cannot be persisted. SymetryML allows the Multi-GPU project to be of backed by either
-*float* or *double*. Use of doubles is generally preferred as they offer higher levels of precision, but if
-memory issues are encountered, switching to a *float* backed model should reduce the memory footprint.
+*float* or *double*. Use of doubles is generally preferred as they offer higher levels of precision. However,
+the extra precision does come with a greater memory footprint.
 TODO: add mgpuf and mgpud difference
 
 
@@ -469,8 +469,8 @@ TODO: update for random forest regression and anomaly
 
 Histograms can be enabled for a project at anytime via the REST API. However, in WEB UI they can only be enabled
 at the beginning of the project creation process. In addition to providing visual information on the attribute inside the project,
-histograms allow a project to create HBA Models (TODO Create link to HBA). While the information provided by the histograms
-can often times be invaluable, they do slow down the speed of project updates. Hence, they should be used sparingly in production environments
+histograms allow a project to create HBA Models. While the information provided by the histograms
+can often times be invaluable, they do reduce the speed of project updates. Hence, they should be used sparingly in production environments
 that require fast learning.
 
 TODO: update for histogram
@@ -1235,7 +1235,11 @@ The range of powers that will be created start at *-2* and go up to *2* using fi
 ===== Random Forest
 
 Random Forest can be enabled by the selecting the corresponding option in *Advanced Project Options* dropdown.
-The required fields when selecting this option are : *RF Type*, *Target Column*, and *Number of Classes*.
+The required fields when selecting this option are :
+* RF Classifier - *RF Type*, *Target Column*, and *Number of Classes*
+* RF Regressor - *RF Type*, and *Target Column*
+* RF Anomaly - *RF Type*
+
 The inputs of the model can also be specified. If left unselected all of the inputs will be used.
 TODO: update for regression and anomaly
 
