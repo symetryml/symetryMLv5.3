@@ -176,15 +176,13 @@ _Sequence_ models attempt to describe the behaviour of sequence of events and mo
 data that is temporal in nature. What is the next most likely state? How likely that a particular
 sequence would occur based on our model? These are the typical questions that sequence models attempt
 to answer.
-TODO : add a section on sequence models?
 
 _Anomaly_ models are unsupervised learners, they do not require the target attribute to be present. Instead,
 they assess the similarity of a particular record to a set of records on which the models was trained on.
 They excel in situations where the number of labeled cases is very small, or cases where
 the true label for the record is unknown. Instances which are drastically different from the
-ones the model was build with, will yield a higher anomaly score than those which are more inline with what
+ones the model was build with, will yield a higher anomaly score than those which are aligned with what
 the model has seen before.
-TODO : add a section on anomaly models
 
 [[evaluating-models]]
 === Evaluating Models
@@ -403,10 +401,8 @@ image::media/web/webUI_selectNumberOfGPU.png[title='Select Number of GPU', width
 
 Available if the environment is GPU enabled. Reserved for the widest possible datasets.
 Multi-GPU projects cannot be persisted. SymetryML allows the Multi-GPU project to be of backed by either
-*float* or *double*. Use of doubles is generally preferred as they offer higher levels of precision. However,
+*float* or *double*. Use of doubles is recommended as they offer higher levels of precision. However,
 the extra precision does come with a greater memory footprint.
-TODO: add mgpuf and mgpud difference
-
 
 [[partition]]
 ==== Partition
@@ -460,10 +456,8 @@ To build the KM model, your data must be contain the following types of columns:
 
 Random Forest is an ensemble algorithm which builds and aggregates the output of multiple decision trees into a single prediction.
 Current version SymetryML supports classification models in binary and multiclass forms as well as regression and anomaly models.
-As with other Online Models, RF parameters must be specified at the beginning of project creation.
+As with other Online Models, RF parameters must be specified at the beginning of the project creation process.
 See section <<rf-projects>> for additional details and the specifics of the parameters required.
-
-TODO: update for random forest regression and anomaly
 
 ==== Histogram
 
@@ -472,8 +466,6 @@ at the beginning of the project creation process. In addition to providing visua
 histograms allow a project to create HBA Models. While the information provided by the histograms
 can often times be invaluable, they do reduce the speed of project updates. Hence, they should be used sparingly in production environments
 that require fast learning.
-
-TODO: update for histogram
 
 [[fusion]]
 ==== Fusion
@@ -678,8 +670,6 @@ to a power powerful set of models which gracefully handle regression, classifica
 * Random Forest (regression)
 * Random Forest (anomaly)
 
-TODO: update for regression and anomaly
-
 [[using-regression-models]]
 ==== Using Regression Models
 
@@ -781,8 +771,6 @@ The anomaly models available in Symetry are:
 * Random Forest  - RFA (requires a RF enabled project)
 * Out of Sample PCA - OOSPCA
 * Histogram Based Anomaly - HBA (requires a histogram enabled project)
-
-TODO: anomaly
 
 [[reducing-models]]
 ==== Reducing Models
@@ -1243,7 +1231,6 @@ The required fields when selecting this option are :
 * RF Anomaly - *RF Type*
 
 The inputs of the model can also be specified. If left unselected all of the inputs will be used.
-TODO: update for regression and anomaly
 
 image::media/web/rf_classifier.png[title='Advanced Options - RF Classifier', width=50%]
 
