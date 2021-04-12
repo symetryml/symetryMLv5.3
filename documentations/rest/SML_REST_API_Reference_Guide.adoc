@@ -5325,7 +5325,7 @@ Body:
 
 This example uses:
 
-* regression task: `?task=binary_classifier`
+* regression task: `?task=regression`
 * specify the heuristic: `"selector_type":"selector_type_fw_bw"`
 * specify the grid search: `"autoselect_grid_type":"autoselect_grid_type_small"`
 ....
