@@ -86,7 +86,7 @@ Response:
 [[select-model-df-api]]
 === Select Model Rest API
 
-Allows to invoke the 'select model' functionality by specifing an external data source.
+Allows to invoke the 'select model' functionality by specifing an external data source id.
 
 ==== URL
 ....
