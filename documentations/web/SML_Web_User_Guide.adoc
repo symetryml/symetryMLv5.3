@@ -392,9 +392,6 @@ the GPU. Provides improved performance over CPU based projects with very wide da
 When creating a New Project, the first window will require a choice of Project Type. If you only have access to 1 GPU, simply select the `GPU` option, and select `Next`. If you have access to, and wish to utilize, more than 1 `GPU`, then select the `Multi-GPU` option, and then fill out the `Num. GPU*` that you will be utilizing:
 
 image::media/web/webUI_selectMultiGPU.png[title='Select Multi-GPU', width=50.0%]
-{nbsp} +
-
-image::media/web/webUI_selectNumberOfGPU.png[title='Select Number of GPU', width=50.0%]
 
 [[mgpu]]
 ==== Multi-GPU
@@ -403,6 +400,8 @@ Available if the environment is GPU enabled. Reserved for the widest possible da
 Multi-GPU projects cannot be persisted. SymetryML allows the Multi-GPU project to be of backed by either
 *float* or *double*. Use of doubles is recommended as they offer higher levels of precision. However,
 the extra precision does come with a greater memory footprint.
+
+image::media/web/webUI_selectNumberOfGPU.png[title='Select Number of GPU', width=50.0%]
 
 [[partition]]
 ==== Partition
