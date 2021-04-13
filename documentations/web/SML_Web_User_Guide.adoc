@@ -1250,11 +1250,11 @@ After the project has finished learning, the final steps in creating the RF mode
 1. Right clicking on the *Exploration* icon, and selecting *Random Forest* from the *Create Model* menu.
 
 image::media/web/rf0.png[title='Create RF Menu', width=50%]
-{nbsp}
+{nbsp} +
 2. Giving your model a name.
 
 image::media/web/rf1.png[title='RF Build Model', width=50%]
-{nbsp}
+{nbsp} +
 3. Clicking *Build Model* button.
 
 [[km-projects]]
