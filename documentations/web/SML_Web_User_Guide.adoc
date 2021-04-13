@@ -1037,7 +1037,7 @@ Once added to a project, a stream will be continuously polled and will cause the
 project to be updated automatically with new incoming data. This behaviour  can be
 paused and restarted again.
 
-image::media/web/stream_options.png[title='Stream Options', width=25%]
+image::media/web/stream_options.png[title='Stream Actions', width=25%]
 {nbsp} +
 
 To stop the update behaviour:
