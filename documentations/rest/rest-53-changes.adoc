@@ -1,5 +1,23 @@
-= TODO
+= SymetryML REST API Reference Manual
+:toc:
+:toclevels: 1
+:toc-placement: preamble
+:doctype: book
+:imagesdir: ./media/rest
+:sectnums:
 
+Copyright © 2020 by Symetry, Inc. +
+14 Pine Street, Ste 6 +
+Morristown, NJ 07960 +
+All Rights Reserved +
+Nov. 30th, 2020
+
+
+[[about-timeseries-expansion]]
+=== About Time Series Expansion
+
+Its possible to add additional features as lag of a basic features. 
+TBD
 
 [[automl]]
 == AutoML with SymetryML
@@ -12,7 +30,7 @@ TODO: Add transform after auto ml
 [[transform-api-endpoint]]
 === Transform Dataframe Endpoint
 
-This rest endpoint returns a transformed dataframe if the project is AutoML enabled. For regular projects the transform
+This rest endpoint returns a transformed dataframe if the project is AutoML enabled or the project has time series transformation enabled. The transformation applied are dictated by the AutoML/time series expansion configuration for the project, please see <<automl-control>> section for details. For regular projects the transform
 endpoint will return the original dataframe.
 
 [[transform-api-endpoint-url]]
@@ -86,7 +104,7 @@ Response:
 [[select-model-df-api]]
 === Select Model Rest API
 
-Allows to invoke the 'select model' functionality by specifing an external data source id.
+Allows to invoke the 'select model' functionality by specifying an external data source id.
 
 ==== URL
 ....
@@ -144,7 +162,7 @@ Body:
 }
 ....
 
-[[elect-model-example-2]]
+[[select-model-example-2]]
 ==== Sample Request Response Regression
 
 ....
@@ -248,7 +266,7 @@ Body:
 }
 ....
 
-[[elect-model-df-example-2]]
+[[select-model-df-example-2]]
 ==== Sample Request Response Regression
 
 ....
