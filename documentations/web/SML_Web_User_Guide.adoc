@@ -930,7 +930,7 @@ image::media/web/http_ds.png[title='HTTP Data Source', width=50%]
 4. Click *Finish* to add the data source.
 +
 image::media/web/verify_new_data_source.png[title='Verify New Data Source', width=50%]
-
+{nbsp}
 
 [[uploading-data-source]]
 ==== Uploading Data Source
