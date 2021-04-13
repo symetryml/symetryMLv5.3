@@ -1235,8 +1235,10 @@ The required fields when selecting this option are :
 The inputs of the model can also be specified. If left unselected all of the inputs will be used.
 
 image::media/web/rf_classifier.png[title='Advanced Options - RF Classifier', width=50%]
+{nbsp} +
 
 image::media/web/rf_regressor.png[title='Advanced Options - RF Regressor', width=50%]
+{nbsp} +
 
 image::media/web/rf_anomaly.png[title='Advanced Options - RF Anomaly', width=50%]
 {nbsp}
