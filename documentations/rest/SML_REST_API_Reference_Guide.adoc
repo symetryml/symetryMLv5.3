@@ -662,10 +662,10 @@ Response:
 * <<about-symetryml-rf>>
 * <<about-symetryml-km>>
 * <<about-partitioned-projects>>
-* <<about-partitioned-projects>>
 * <<about-hashtrick-projects>>
 * <<about-sequence-projects>>
 * <<about-federated-projects>>
+* <<about-timeseries-expansion>>
 * <<create-new-symetryml-project>>
 * <<project-save>>
 * <<project-freeze>>
@@ -769,6 +769,11 @@ For more information on __ngrams__, order, and level, see https://en.wikipedia.o
 New with version 5.0 of SymetryML is the capabilities to allows multiple SymetryProject - possibly on different sites / geographical locations / different business units - to synchronize with each other in order to leverage each others data without sharing the actual data. This functionality is called `Federated Learning`. A federated project act exactly the same as any other project in terms of how you build model or explore the data. The only difference is how you create them. For more details about the lifecycle of federated project please consult the <<fedml-api>> section.
 
 
+[[about-timeseries-expansion]]
+=== About Time Series Expansion
+
+TBD
+
 [[create-new-symetryml-project]]
 === Create New SymetryML project
 
@@ -808,11 +813,24 @@ new data is pushed into it. The default behavior is *true*. If *false* is used, 
 |=================================
 |Parameter |Required/Optional? |Description
 |pid |Required |Name of the new SymetryML project.
-|Type |Optional |Possible types include cpu, gpu or sequence. Default is dynamic project; that is SymetryML will use CPU resources for any computation related to this project.
+|Type |Optional | The type of the project. Please see <<project-type>> table for details.
 |persist |Optional |Whether to persist or not a project. Valid values are +
 * true +
 * false
 | enableHistogram | Optional | Enable histogram for continuous and binary attributes in this project.
+|=================================
+
+[[project-type]]
+.Project types
+[width="100%",cols="<25%,<75%",options="header",]
+|=================================
+|Type |Description
+|*cpu* | Cpu based project, this is the default value 
+|*gpu* | GPU based project 
+|*sequence* | Sequence project, see <<about-sequence-projects>>
+|*partition* | Partitioned project, see <<about-partitioned-projects>>
+| *mgpuf* | Multi-GPU project using 32 bits float 
+| *mgpud* | Multi-GPU project using 64 bits float - aka double
 |=================================
 
 [[http-responses-8]]
@@ -2702,11 +2720,12 @@ For each features / attributes for which histogram are requested a <<mlcontext-j
 [width="100%", cols="<25%,<25%,<50%",options="header",]
 |===========================================================================================================================
 | Parameter | Required / Optional ? | Description
-| hist.bins | Required | Number of bins in the histogram
-| hist.max | Optional | Minimum value of the histogram on the x axis
-| hist.min | Optional | Maximum value of the histogram on the x axis
-| hist.is.normalized | Optional | normalize the histogram in percentage insttead of using absolute value.
-| hist.use.subsampling | Optional - Default is true | A boolean that specify to use a subsample of the data to compute histogram. This is done so that computation is more efficient. If one need the full histogram pass false.
+| `hist.bins` | Required | Number of bins in the histogram
+| `hist.max` | Optional | Minimum value of the histogram on the x axis
+| `hist.min` | Optional | Maximum value of the histogram on the x axis
+| `hist.is.normalized` | Optional | normalize the histogram in percentage insttead of using absolute value.
+| `hist.use.subsampling` | Optional - Default is true | A boolean that specify to use a subsample of the data to compute histogram. This is done so that computation is more efficient. If one need the full histogram pass false.
+|`hist.use.random` | Optional | Use random sample when used in conjonction with `hist.use.subsampling`.
 |===========================================================================================================================
 
 
@@ -2750,6 +2769,7 @@ Response:
 == Modeling API
 
 * <<specific-model-building>>
+* <<anomaly-models>>
 * <<mlcontext-build-parameters>>
 * <<optimized-model-building>>
 * <<building-sequence-models>>
@@ -2761,6 +2781,18 @@ Response:
 === About Model Building
 
 This API function allows for the building of a model by specifying the attribute and the targets to use to build the model. The information about which attributes to use to build the model are passed as part of the body request in the MLContext JSON data structure. For more information see the section <<mlcontext-build-parameters>>.
+
+
+[[anomaly-models]]
+==== Real-Time Anomaly Models
+
+SymetryML version 5.3 introduces 3 new anomaly detection algorithms:
+
+* MFAnomaly: an anomaly model based on a mixture of isolation forest and SymetryML online random forest algorithm.
+* OSSPCAModel: Online implementation of Out of sample PCA.
+* HBAModel: Online model based on histograms of the input features.
+
+These algorithms work in real-time on streaming data and are a type of of unsupervised learning algorithm in the sense that one does not need to provide 'positive' examples of anomalies to the different algorithms. The 3 models use intrinsic values of the inputs features to compute an anomaly scores. To create such models just use the appropriate id - from <<model-algorithm-id>> section - when creating them using <<build-model>> rest API.
 
 [[elasticnet-aic]]
 ==== About Elastic Net AIC
@@ -2809,7 +2841,11 @@ The following models are supported. For power regression model to be available a
 |*mqda* |Quadratic discriminant Analysis
 |*powerreg* | Power Regression
 |*ridge* |Ridge Regression
-|*rf_classifier* | Random Forest Classifier
+|*rf_classifier* | Online Random Forest Classifier
+|*rf_regressor* | Online Random Forest Regression
+|*rf_anomaly* | Anomaly / outlier model based on Online Random forest and isolation forest
+|*oospca* | Online Anomaly / outlier model based on 'out of sample PCA'.
+|*hba* | Online Anomaly / outlier model based on histograms of the input features.
 |======================================
 
 
@@ -2831,15 +2867,16 @@ In order to use the Online random forest additional parameters must be specified
 [width="100%", cols="<30%,70%",options="header",]
 |===================
 |HyperParameter | Description
-| rf_num_classes    | mandatory for classifier, specify number of classes, *default:2*
-| rf_features     | list of columns to use for the Random Forest. If nothing is specifying then all continuous and binary attributes will be used, beside the target. Values are to be separated by coolon ':'.
-| rf_always_split     | control if split should occurs when a node contains only examples of one class, default is false, should be true for anomaly detection, *default:false*
-| rf_num_trees      | number of trees in the forest, *default:10*
-| rf_step       | Gradient step. *default:1*
-| rf_complexity     | Control how complex the trees can grow, typical *default:16*, typical value 8 - 50
-| rf_missing_value    | value to use for missing value, *default:0.0*
-| rf_dirichlet      | prior for classification prediction, *default .5* for binary classification, *1/n* for multiple class problems
-| rf_rnd_seed | Random seed, *default:126*.
+| `rf_num_classes`    | mandatory for classifier, specify number of classes, *default:2*
+| `rf_features`     | list of columns to use for the Random Forest. If nothing is specifying then all continuous and binary attributes will be used, beside the target. Values are to be separated by coolon ':'.
+| `rf_always_split`     | control if split should occurs when a node contains only examples of one class, default is false, should be true for anomaly detection, *default:false*
+| `rf_num_trees`      | number of trees in the forest, *default:10*
+| `rf_step`      | Gradient step. *default:1*
+| `rf_complexity`     | Control how complex the trees can grow, typical *default:16*, typical value 8 - 50
+| `rf_max_split_time` | Another way of controlling how complex tree can grow. if both `rf_complexity` and `rf_max_split_time` are specified `rf_max_split_time` has priority.
+| `rf_missing_value`    | value to use for missing value, *default:0.0*
+| `rf_dirichlet`      | prior for classification prediction, *default .5* for binary classification, *1/n* for multiple class problems
+| `rf_rnd_seed` | Random seed, *default:126*.
 |===================
 
 
@@ -3013,7 +3050,10 @@ Optional parameters for Elastic Net are the following:
 
 The combined effect of centering the targets (centerY = true) as well as standardize the features (standardize = true) is to get rid of the intercept.
 
-[[url-20]]
+[[build-model]]
+=== Build Model Rest API
+
+[[build-model-url]]
 ==== URL
 ....
 POST /symetry/rest/{cid}/projects/{pid}/build?modelid={modelid}&algo={algorithm} [body=MLContext]
@@ -5190,6 +5230,8 @@ which feature interactions to be added
 | Attribute Filtering | automl_ignore_low_variance | *true\|false*, default:false
 | Attribute Filtering | automl_threshold_variance | *double*, default:0.0
 | Attribute Filtering | automl_use_svd | *true\|false*, default:false
+| Attribute Filtering | automl_vif_filter | *true\|false*, default:false
+| Attribute Filtering | automl_vif_filter_threshold | this is the threshold to use when `automl_vif_filter` is true, *double*, default:5.0
 | Feature Engineering | automl_use_feature_importance | *true\|false*, default:false
 | Feature Engineering | automl_add_feature_interaction | *true\|false*, default:false
 | Feature Engineering | automl_feature_interaction_threshold | *double*, default:1, percentage of interaction pairs to keep from the FAST algorithm.
