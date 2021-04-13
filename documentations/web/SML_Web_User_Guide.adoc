@@ -616,6 +616,7 @@ identifying the _Iris Setosa_ species of the Iris plant.
 
 [[id-sml-information-gain]]
 image::media/web/sml_information_gain.png[title='Information Gain', width=100%]
+{nbsp} +
 
 
 *Variance Inflation Factor* (VIF) allows the user to measure the degree of collinearity between a set of factors.
