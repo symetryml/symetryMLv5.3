@@ -392,9 +392,6 @@ the GPU. Provides improved performance over CPU based projects with very wide da
 When creating a New Project, the first window will require a choice of Project Type. If you only have access to 1 GPU, simply select the `GPU` option, and select `Next`. If you have access to, and wish to utilize, more than 1 `GPU`, then select the `Multi-GPU` option, and then fill out the `Num. GPU*` that you will be utilizing:
 
 image::media/web/webUI_selectMultiGPU.png[title='Select Multi-GPU', width=50.0%]
-{nbsp} +
-
-image::media/web/webUI_selectNumberOfGPU.png[title='Select Number of GPU', width=50.0%]
 
 [[mgpu]]
 ==== Multi-GPU
@@ -403,6 +400,8 @@ Available if the environment is GPU enabled. Reserved for the widest possible da
 Multi-GPU projects cannot be persisted. SymetryML allows the Multi-GPU project to be of backed by either
 *float* or *double*. Use of doubles is recommended as they offer higher levels of precision. However,
 the extra precision does come with a greater memory footprint.
+
+image::media/web/webUI_selectNumberOfGPU.png[title='Select Number of GPU', width=50.0%]
 
 [[partition]]
 ==== Partition
@@ -425,7 +424,9 @@ into something resembling a normal distribution. The method of transforming that
 
 SymetryML projects with power transformation enabled will automatically create new attributes representing various power transformations of
 the target so that they can be modelled against the existing features. These additional target features will have a
-prefix and separator to easily pinpoint them. (e.g `pt_sepal_width^-2.0`, `pt_sepal_width^-1.8`, `pt_sepal_width^-1.6`, ..., `pt_sepal_width^1.8`, `pt_sepal_width^2.0`). It's possible to configure the prefix and separator - `pt_` and `^` in our previous example. Please refer to the <<power-transf-sym-ctrl-parameter>> table for details.
+prefix and separator to easily pinpoint them. (e.g `pt_sepal_width^-2.0`, `pt_sepal_width^-1.8`, `pt_sepal_width^-1.6`, ..., `pt_sepal_width^1.8`, `pt_sepal_width^2.0`).
+It's possible to configure the prefix and separator - `pt_` and `^` in our previous example.
+Please refer to the <<../rest/SML_REST_API_Reference_Guide.adoc#power-transf-sym-ctrl-parameter,power ctrl parameter>> table for details.
 
 Once a project has learned these transformations, a Power Regression model can be build which would select the optimal transformed target.
 
@@ -615,6 +616,7 @@ identifying the _Iris Setosa_ species of the Iris plant.
 
 [[id-sml-information-gain]]
 image::media/web/sml_information_gain.png[title='Information Gain', width=100%]
+{nbsp} +
 
 
 *Variance Inflation Factor* (VIF) allows the user to measure the degree of collinearity between a set of factors.
@@ -928,7 +930,7 @@ image::media/web/http_ds.png[title='HTTP Data Source', width=50%]
 4. Click *Finish* to add the data source.
 +
 image::media/web/verify_new_data_source.png[title='Verify New Data Source', width=50%]
-
+{nbsp}
 
 [[uploading-data-source]]
 ==== Uploading Data Source
@@ -1211,7 +1213,7 @@ image::media/web/p_advanced.png[title='Advanced Options', width=50%]
 Enabling power transformation when creating a project allows for the creation of power
 regression models. See <<power-transformation>>.
 
-image::media/web/p_advanced_pt.png[title='Advanced Options', width=50%]
+image::media/web/p_advanced_pt.png[title='Advanced Options - Power Transformation', width=50%]
 {nbsp} +
 
 When the *Power Transformation* option is selected, the user can specify the range of powers which will be
@@ -1233,8 +1235,10 @@ The required fields when selecting this option are :
 The inputs of the model can also be specified. If left unselected all of the inputs will be used.
 
 image::media/web/rf_classifier.png[title='Advanced Options - RF Classifier', width=50%]
+{nbsp} +
 
 image::media/web/rf_regressor.png[title='Advanced Options - RF Regressor', width=50%]
+{nbsp} +
 
 image::media/web/rf_anomaly.png[title='Advanced Options - RF Anomaly', width=50%]
 {nbsp}
@@ -1246,11 +1250,11 @@ After the project has finished learning, the final steps in creating the RF mode
 1. Right clicking on the *Exploration* icon, and selecting *Random Forest* from the *Create Model* menu.
 
 image::media/web/rf0.png[title='Create RF Menu', width=50%]
-{nbsp}
+{nbsp} +
 2. Giving your model a name.
 
 image::media/web/rf1.png[title='RF Build Model', width=50%]
-{nbsp}
+{nbsp} +
 3. Clicking *Build Model* button.
 
 [[km-projects]]
@@ -1261,6 +1265,7 @@ To enable Kaplan-Meier model, the corresponding option needs to be selected in *
 The required fields when selecting this option are : *Time Column*, *Event Column* and *Group Column*
 
 image::media/web/p_advanced_km.png[title='Advanced Options - RF', width=50%]
+{nbsp}
 
 Clicking *Finish* will start the project learn and fit the KM model.
 
