@@ -1213,7 +1213,7 @@ image::media/web/p_advanced.png[title='Advanced Options', width=50%]
 Enabling power transformation when creating a project allows for the creation of power
 regression models. See <<power-transformation>>.
 
-image::media/web/p_advanced_pt.png[title='Advanced Options', width=50%]
+image::media/web/p_advanced_pt.png[title='Advanced Options - Power Transformation', width=50%]
 {nbsp} +
 
 When the *Power Transformation* option is selected, the user can specify the range of powers which will be
