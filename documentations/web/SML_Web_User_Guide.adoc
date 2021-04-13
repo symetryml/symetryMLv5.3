@@ -426,7 +426,7 @@ SymetryML projects with power transformation enabled will automatically create n
 the target so that they can be modelled against the existing features. These additional target features will have a
 prefix and separator to easily pinpoint them. (e.g `pt_sepal_width^-2.0`, `pt_sepal_width^-1.8`, `pt_sepal_width^-1.6`, ..., `pt_sepal_width^1.8`, `pt_sepal_width^2.0`).
 It's possible to configure the prefix and separator - `pt_` and `^` in our previous example.
-Please refer to the <<../rest/SML_REST_API_Reference_guide.adoc#power-transf-sym-ctrl-parameter>> table for details.
+Please refer to the <<../rest/SML_REST_API_Reference_Guide.adoc#power-transf-sym-ctrl-parameter>> table for details.
 
 Once a project has learned these transformations, a Power Regression model can be build which would select the optimal transformed target.
 
