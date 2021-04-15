@@ -5629,6 +5629,8 @@ Depending on how many attributes your project has it can take anywhere a few sec
 [[auto-select-api]]
 === Auto Select Rest API
 
+Allows to invoke the 'auto select' functionality by specifying an external data source id as the out of sample data to use for model assessment.
+
 ==== URL
 ....
 POST /symetry/rest/{cid}/projects/{pid}/autoSelect/{dsid} [body=MLContext]
