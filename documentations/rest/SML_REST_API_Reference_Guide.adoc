@@ -795,27 +795,27 @@ The body of the request consist of a key/value map. It is optional and depends o
 [width="100%",cols="<12%,<13%,<75%",options="header",]
 |===============================
 | Parameter | type | Description
-|*sml_project_autosave* | boolean | Default is *true*. This parameter control wheather or not a project is automatically saved after
-new data is pushed into it. The default behavior is *true*. If *false* is used, it is important to invoke the <<project-save>> endpoint to persist the project in order to not loose information between server restart.
-| *sml_project_learn_merge* | boolean | Default is *false*. This parameter is used whenever a project learn new data, see <<learning-and-updating-symetryml-projects>> for details. This configuration allows to `commit` new data to a project only if the whole <<dataframe-json>> was processed without error. Whenever new data is pushed to a SymetryML project the following happens: +
+|*sml_project_autosave* | boolean | Default is *true*. This parameter controls whether or not a project is automatically saved after
+new data is pushed into it. The default behavior is *true*. If *false* is used, it is important to invoke the <<project-save>> endpoint to persist the project in order to not lose information between server restart.
+| *sml_project_learn_merge* | boolean | Default is *false*. This parameter is used whenever a project learns new data, see <<learning-and-updating-symetryml-projects>> for details. This configuration allows to `commit` new data to a project only if the whole <<dataframe-json>> was processed without an error. Whenever new data is pushed to a SymetryML project the following happens: +
 
 1. A new temporarily project is created +
 2. The new temporarily project is updated with the the data. +
-3. If no problem is encountered the temporiarily project is merged with the main project. + 
+3. If no problem is encountered the temporary project is merged with the main project. +
 4. This allows a *commit all or nothing* approach to processing data.
 
 |===============================
 
 [[create-project-type-vs-params]]
 
-The following table list mandatory parameters for sequence and partitionned projects:
+The following table list mandatory parameters for sequence and partitioned projects:
 
 .Create Project Map key value
 [width="100%",cols="<12%,<13%,<75%",options="header",]
 |===============================
 |Type |Mandatory Parameters | Description
 |*Sequence* | sml_project_order | specify the sequence order (ngram)
-|*Partitionned* | partitionSplit | specify which attribute / column to use to split the partition
+|*Partitioned* | partitionSplit | specify which attribute / column to use to split the partition
 |===============================
 
 [[query-parameters-1]]
@@ -837,11 +837,11 @@ The following table list mandatory parameters for sequence and partitionned proj
 [width="100%",cols="<25%,<75%",options="header",]
 |=================================
 |Type |Description
-|*cpu* | Cpu based project, this is the default value 
-|*gpu* | GPU based project 
+|*cpu* | Cpu based project, this is the default value
+|*gpu* | GPU based project
 |*sequence* | Sequence project, see <<about-sequence-projects>>
 |*partition* | Partitioned project, see <<about-partitioned-projects>>
-| *mgpuf* | Multi-GPU project using 32 bits float 
+| *mgpuf* | Multi-GPU project using 32 bits float
 | *mgpud* | Multi-GPU project using 64 bits float - aka double
 |=================================
 
@@ -5357,7 +5357,7 @@ Response:
 [[select-model-api-intro]]
 === Select Model introduction
 
-SymetryML *Select Model*  is a feature selection functionality. It allows to automatically select the best features 
+SymetryML *Select Model*  is a feature selection functionality. It allows to automatically select the best features
 for a given model algorithm and it leverages SymetryML unique capabilities to build different predictive model quickly.
 The functionality basically build various model each with differents input attributes using some heuristics. It then
 compute a score for them using out of sample data and will keep the best one. The following table describe the
@@ -5387,12 +5387,12 @@ heuristics available:
 [width="100%", cols="<40%,<60%",options="header",]
 |=============================
 | Parameter | Description
-| *selector_type_fw_bw* | Forward / Backward heuristic. Number of iteration is by default 5. 
+| *selector_type_fw_bw* | Forward / Backward heuristic. Number of iteration is by default 5.
 It can be controlled with the `selector_max_iterations` parameters.
-| *selector_type_simple* | Simple heuristic 
-| *selector_type_brute* | Brute force selector. 
-| *selector_type_iteration* | A Selector that will either try a specific number of random combination 
-or will try for a specific number of seconds. `selector_max_iterations` or `selector_max_seconds` must also be specified 
+| *selector_type_simple* | Simple heuristic
+| *selector_type_brute* | Brute force selector.
+| *selector_type_iteration* | A Selector that will either try a specific number of random combination
+or will try for a specific number of seconds. `selector_max_iterations` or `selector_max_seconds` must also be specified
 with this type of selector
 |=============================
 
@@ -5415,7 +5415,7 @@ Elastic Net model has 2 hyper parameters that can be optimized _eta_ and _lambda
 [[select-model-api]]
 === Select Model Rest API
 
-Allows to invoke the 'select model' functionality by specifying an external data source id as the out of sample data 
+Allows to invoke the 'select model' functionality by specifying an external data source id as the out of sample data
 to use for model assessment.
 
 ==== URL
