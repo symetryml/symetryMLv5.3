@@ -1009,9 +1009,17 @@ and adding the corresponding parameter/value pair.
 
 1. Right-click the project node, and then click *Add Stream*.
 2. Specify the required stream info (bootstrap servers, topic, and etc.)
-3. Ensure your information is valid and click *Next*
-4. Verify the stream in the preview panel. Click *Next* to continue.
-5. In the final panel specify the correct type mapping and click *Finish*
+3. When choosing a stream topic, the topic names will be displayed in the following format : *TOPIC_NAME:NUM_PARTITIONS*.
+Ensure the correct partitions have been selected by clicking *Kafka Options* button and verifying the prefilled *kafka.partitions* field.
++
+image::media/web/kafka_partitions0.png[title='Stream Topic Browser', width=50%]
+{nbsp}
++
+image::media/web/kafka_partitions1.png[title='Stream Parameters', width=50%]
+{nbsp}
+4. Ensure your information is valid and click *Next*
+5. Verify the stream in the preview panel. Click *Next* to continue.
+6. In the final panel specify the correct type mapping and click *Finish*
 
 [[creating-new-project-stream]]
 ==== Creating a Project with Stream
@@ -1029,7 +1037,7 @@ Once added to a project, a stream will be continuously polled and will cause the
 project to be updated automatically with new incoming data. This behaviour  can be
 paused and restarted again.
 
-image::media/web/stream_options.png[title='Stream Info', width=25%]
+image::media/web/stream_options.png[title='Stream Actions', width=25%]
 {nbsp} +
 
 To stop the update behaviour:
