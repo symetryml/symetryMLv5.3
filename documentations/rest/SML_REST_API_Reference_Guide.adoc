@@ -4923,7 +4923,7 @@ To use a Kafka stream data source, create a JSON data structure described in <<d
 |*bootstrap.servers* | Required |
 |*schema.registry.url* | Required |
 |*kafka.topic* | Required |
-|*kafka.partitions* | Optional | default to all partitions
+|*kafka.partitions* | Optional | Default to all partitions. The list of partition to use must be defined as a list of comma separated integers. For instance `0,2,4,6,8` or `0,1,2,6,7,10,12`.
 |*kafka.stream.time_between_persist* | Optional | Default to 300 seconds, that is 5 minutes. How long to wait between when the Symetry Project will persist its state. To disable this pass -1.
 |*enable.auto.commit* | Optional | default to true
 |*auto.commit.interval.ms* | Optional | default to 1000 ms.
