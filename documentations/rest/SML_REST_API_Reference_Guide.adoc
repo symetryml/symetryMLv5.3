@@ -790,13 +790,25 @@ POST /symetry/rest/{cid}/projects?pid={new-project-id} [body=KSVSMap]
 
 The body of the request consist of a key/value map. It is optional and depends on the type of project. Please refer to the following table that describes mandatory parameters for the different type of projects. Also refer to <<ksvsmap-json>> for detail on the request body json datastructure.
 
+[[create-project-parameters]]
 .Extra Optional Parameters For All Projects
 [width="100%",cols="<12%,<13%,<75%",options="header",]
 |===============================
 | Parameter | type | Description
 |*sml_project_autosave* | boolean | Default is *true*. This parameter control wheather or not a project is automatically saved after
 new data is pushed into it. The default behavior is *true*. If *false* is used, it is important to invoke the <<project-save>> endpoint to persist the project in order to not loose information between server restart.
+| *sml_project_learn_merge* | boolean | Default is *false*. This parameter is used whenever a project learn new data, see <<learning-and-updating-symetryml-projects>> for details. This configuration allows to `commit` new data to a project only if the whole <<dataframe-json>> was processed without error. Whenever new data is pushed to a SymetryML project the following happens: +
+
+1. A new temporarily project is created +
+2. The new temporarily project is updated with the the data. +
+3. If no problem is encountered the temporiarily project is merged with the main project. + 
+4. This allows a *commit all or nothing* approach to processing data.
+
 |===============================
+
+[[create-project-type-vs-params]]
+
+The following table list mandatory parameters for sequence and partitionned projects:
 
 .Create Project Map key value
 [width="100%",cols="<12%,<13%,<75%",options="header",]
@@ -2124,7 +2136,7 @@ POST /symetry/rest/{cid}/projects/fusion/create [Encrypted [FusionCellInfoList]]
 ....
 
 [[create-fusion-project-body]]
-==== Create New SymetryML project Body
+==== Create New Fusion SymetryML project Body
 
 The body of the request consist of an encrypted <<fusioncellinfolist-json>>. It is mandatory and contains login information to access the REST-API of each cells.
 
@@ -2204,7 +2216,7 @@ POST /symetry/rest/{cid}/projects/fusion/{pid}/updateCellsInfo [body=Encrypted F
 ....
 
 [[fusion-project-update-cells-body]]
-==== Create New SymetryML project Body
+==== Create New Fusion SymetryML project Body
 
 The body of the request consist of an encrypted <<fusioncellinfolist-json>>. It contains login information to access the REST-API of each cells.
 
