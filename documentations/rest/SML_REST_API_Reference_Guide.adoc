@@ -5617,12 +5617,12 @@ Body:
 
 The auto-select build on top of the <<select-model>> functionality and allows to automate finding the best model for a given task (binary classification or regression model). This functionality will try various combinations of input attributes on various types of models and select the best one automatically. Auto Select perform the following:
 
-1. Using a heuristic - see <<auto-select-heuristic>> - it will try various combination of the input attributes to build a model
-*  When using a regression Task, there is also another parameter that controls the grid search size. Please see the <<auto-select-grid-table>> table for details
+1. Using a heuristic - see <<select-heuristic>> - it will try various combination of the input attributes to build a model
+*  When using a regression Task, there is also another parameter that controls the grid search size. Please see the <<select-grid-table>> table for details
 2. It uses a provided out-of-sample datasets to compute a score for the model. Example of scoring are AUC or RMSE.
 3. It repeats step (1) and (2) to build many models - possibly thousands - and then select the best model.
 
-Depending on how many attributes your project has it can take anywhere a few seconds to several hours. Be sure to understand the <<auto-select-heuristic>> section as well as the <<auto-select-grid-table>>.
+Depending on how many attributes your project has it can take anywhere a few seconds to several hours. Be sure to understand the <<select-heuristic>> section as well as the <<select-grid-table>>.
 
 
 
