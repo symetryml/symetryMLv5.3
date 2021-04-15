@@ -5346,12 +5346,15 @@ Response:
 ....
 
 
-
-
-
-
 [[auto-select]]
 == Auto Select with SymetryML
+
+* <<auto-select-intro>>
+* <<auto-select-api>>
+* <<auto-select-df-api>>
+
+[[auto-select-intro]]
+=== Auto Select Introduction
 
 The auto-select functionality allows to automate finding the best model for a given task (binary classification or regression model). This functionality will try various combinations of input attributes on various types of models and select the best one automatically. Auto Select perform the following:
 
@@ -5361,9 +5364,6 @@ The auto-select functionality allows to automate finding the best model for a gi
 3. It repeats step (1) and (2) to build many models - possibly thousands - and then select the best model.
 
 Depending on how many attributes your project has it can take anywhere a few seconds to several hours. Be sure to understand the <<auto-select-heuristic>> section as well as the <<auto-select-grid-table>>.
-
-[[auto-select-intro]]
-=== Auto Select Introduction
 
 [[auto-select-heuristic]]
 .auto select heuristic
