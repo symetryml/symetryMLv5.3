@@ -5360,9 +5360,12 @@ Response:
 SymetryML *Select Model*  is a feature selection functionality. It allows to automatically select the best features 
 for a given model algorithm and it leverages SymetryML unique capabilities to build different predictive model quickly.
 The functionality basically build various model each with differents input attributes using some heuristics. It then
-compute a score for them using out of sample data and will keep the best one.
+compute a score for them using out of sample data and will keep the best one. The following table describe the
+heuristics available:
 
-[[auto-select-heuristic]]
+[[select-heuristic]]
+==== Select Heuristic
+
 .Select heuristic
 [width="100%",cols="<30%,<70%",options="header",]
 |================================================================
@@ -5599,9 +5602,6 @@ Body:
     }
 }
 ....
-
-
-
 
 
 [[auto-select]]
