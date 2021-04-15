@@ -2806,6 +2806,8 @@ SymetryML version 5.3 introduces 3 new anomaly detection algorithms:
 
 These algorithms work in real-time on streaming data and are a type of of unsupervised learning algorithm in the sense that one does not need to provide 'positive' examples of anomalies to the different algorithms. The 3 models use intrinsic values of the inputs features to compute an anomaly scores. To create such models just use the appropriate id - from <<model-algorithm-id>> section - when creating them using <<build-model>> rest API.
 
+TBD.
+
 [[elasticnet-aic]]
 ==== About Elastic Net AIC
 
@@ -5340,6 +5342,7 @@ POST /symetry/rest/{cid}/projects/{pid}/autoSelect/{dsid} [body=MLContext]
 | task | Required | Task to perform `binary_classification` or `regression`
 |=============================
 
+
 [[auto-select-build-parameters]]
 ==== MLContext Build Parameters
 
@@ -5348,8 +5351,44 @@ POST /symetry/rest/{cid}/projects/{pid}/autoSelect/{dsid} [body=MLContext]
 |=============================
 | Parameter | Required/Optional?  | Type | Description
 | *rnd_seed* | Optional | Integer | Set the seed of the randomizer
-| *selector_type* | Optional | String |Default is *selector_type_fw_bw*
-| *autoselect_grid_type* | Optional | String | Default is *autoselect_grid_type_tiny*
+| *selector_type* | Optional | String |Default is *selector_type_fw_bw*. Please see
+<<auto-select-selector-types>> for details
+| *autoselect_grid_type* | Optional | String | Default is *autoselect_grid_type_tiny*. Please see
+<<auto-select-grid-types>> for details.
+| *autoselect_thread_pool_size* | Optional | Integer | Default is 8.
+|=============================
+
+
+[[auto-select-selector-types]]
+===== Selector Types
+
+[width="100%", cols="<40%,<60%",options="header",]
+|=============================
+| Parameter | Description
+| *selector_type_fw_bw* | Forward / Backward heuristic for a number of iteration. Number of iteration is by default 5. 
+It can be controlled with the `selector_max_iterations` parameters.
+| *selector_type_simple* | Simple heuristic that simply try to add all the features one feature at the time 
+and will keep the best model. If you you have 20 features, this heuristic will built at most 20 models.
+| *selector_type_brute* | Brute force selector. Will try all possible permutation combination. Be careful when to use this.
+| *selector_type_iteration* | A Selector that will either try a specific number of random combination 
+or will try for a specific number of seconds. `selector_max_iterations` or `selector_max_seconds` must also be specified 
+with this type of selector
+|=============================
+
+
+[[auto-select-grid-types]]
+===== Grid Types
+
+Grid types control the search space for the the `eta` and `lambda` hyperparameter of the Elasticnet model.
+As such it is only used for regression type tasks.
+
+[width="100%", cols="<40%,<60%",options="header",]
+|=============================
+| Parameter | Description
+| *autoselect_grid_type_tiny* | eta [0, 0.5, 1.0] x lambda [1e-3, 1e-2, 0.1]
+| *autoselect_grid_type_small* | eta [0, 0.5, 1.0] x lambda [1e-3, 1e-2, 0.1, 1]
+| *autoselect_grid_type_normal* | eta [0, 0.3333, 0.6666, 1.0] x lambda [1e-4, 1e-3, 1e-2, 0.1, 1, 10]
+| *autoselect_grid_type_large* | eta [0, 0.2, 0.4, 0.6, 0.8, 1.0] x lambda [1e-9, 1e-8, 1e-7, 1e-6, 1e-5, 1e-4, 1e-3, 1e-2, 0.1, 1, 10, 100, 1000]
 |=============================
 
 [[auto-select-response]]
