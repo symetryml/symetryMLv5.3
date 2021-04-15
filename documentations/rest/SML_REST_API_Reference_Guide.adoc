@@ -5499,7 +5499,8 @@ Body:
 [[select-model-df-api]]
 === Select Model Dataframe Rest API
 
-Allows to invoke the 'select model' functionality by using a <<dataframe-json>> passed in the request body.
+Allows to invoke the 'select model' functionality by using a <<dataframe-json>> passed in the request body
+as the out of sample data to be used for models assessment.
 
 ==== URL
 ....
