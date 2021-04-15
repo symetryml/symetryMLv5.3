@@ -15,7 +15,7 @@ Nov. 30th, 2020
 [[introduction]]
 == Introduction
 
-This reference manual describes the SymetryML REST Application Programing Interface (API) that is exposed from Symetry Inc. The API lets you create, update, and delete SymetryML projects that can be used for data-mining exploration and predictive modeling.
+This reference manual describes the SymetryML REST Application Programming Interface (API) that is exposed from Symetry Inc. The API lets you create, update, and delete SymetryML projects that can be used for data-mining exploration and predictive modeling.
 
 [[audience]]
 === Audience
@@ -287,7 +287,7 @@ As of Version 5.0 SymetryML does not fully conform to the JSON syntax, more spec
 |*ProjectInfoList* (see <<projectinfolist-json>>) |List of ProjectInfo.
 |*StringList* (see <<stringlist-json>>) |Holds an array of string. This response is returned when asking for the list of SymetryML project IDs that was saved on Amazon S3 or when asking for the list of current job ID.
 | *FederationInfo*  (see <<federationinfo-json>>) | Hold information about a federation. for more information consult the <<fedml-api>> section.
-| *AwsInfo* (see <<awsinfo-json>>)| Data Structure that contains information about SNS topics, SQS queues and SNS subscripttions for a given AWS user. Please consult the <<fedml-api-get-aws-info>> for more information.
+| *AwsInfo* (see <<awsinfo-json>>)| Data Structure that contains information about SNS topics, SQS queues and SNS subscriptions for a given AWS user. Please consult the <<fedml-api-get-aws-info>> for more information.
 | *DensityList* (see <<densitylist-json>>)| The data structure returned by the <<density-estimate>> rest call.
 |==========
 
@@ -581,7 +581,7 @@ Response:
 This API function lets you create new key values in the Encoder. When invoking this REST endpoint, the server expects to receive the following columns in the DataFrame (see <<dataframe-json>>) in the order shown below.
 
 1.  Key to add a value. If the key does not exist, it will be created.
-2.  Key value to addcount and sum.
+2.  Key value to add count and sum.
 3.  Key type.
 4.  Count for the new key.
 5.  sum for the new key.
@@ -688,7 +688,7 @@ SymetryML project are different than _classical_ machine learning or other data 
 SymetryML is different. There is no limitation on the number of rows that can be processed and the number of rows do not impact the memory requirement to build a model. Updating a project with some data and building a machine learning model based on a project are 2 separates operations:
 
 * When updating a project - that is learning or forgetting some data - internally some representation of the data is being updated. This update is usually quite fast. This internal representation can be queried in real time using the <<exploration-api>>.
-* When building a model, The internal representation is used to extract values needed by each different machine learning models supported by SymetryML. This makes model building very quick, usually under a few milli-seconds. If another models is needed perhaps with differents inputs and/or target(s), one just need to issue a request to build another model and no _re-scanning_ of the data is needed. Models are built based on the current state of a project. If a project was updated with some data, a rebuild of the model might be needed so that the models use the latest data available in the project.
+* When building a model, The internal representation is used to extract values needed by each different machine learning models supported by SymetryML. This makes model building very quick, usually under a few milli-seconds. If another models is needed perhaps with different inputs and/or target(s), one just need to issue a request to build another model and no _re-scanning_ of the data is needed. Models are built based on the current state of a project. If a project was updated with some data, a rebuild of the model might be needed so that the models use the latest data available in the project.
 
 [[about-symetryml-project-type]]
 === About SymetryML Project Type
@@ -710,7 +710,7 @@ New with SymetryML version 5. are “Federated” project types. The following t
 - Project stored on multiple GPUs memory. +
 - Use this type of project if you have dense data with more than 1000 attributes and you have multiple GPUs available. Please note that you cannot directly use category with a GPU project type. Such data needs to be one hot encoded before pushing it into a SymetryML GPU project.
 |Sequence |SymetryML need to perform some additional logic for these type of models to be built. Use the 'sequence' project type so that you can build such models on your data. See the section <<about-sequence-projects>> for more details.
-|Partitionned | Use this type of project if you need to use LDA model with multi-class classifier or if you need to build a QDA model. When creating such projects one needs to specify the attribute that will be used to partition the project. This attribute needs to be of type ```String``` and usually should be the target for building your LDA or QDA models.
+|Partitioned | Use this type of project if you need to use LDA model with multi-class classifier or if you need to build a QDA model. When creating such projects one needs to specify the attribute that will be used to partition the project. This attribute needs to be of type ```String``` and usually should be the target for building your LDA or QDA models.
 |Hash-trick | This type of project encoder is ideally suited for datasets with large number of categorical values. The hashing operation limits the cardinality of categorical attributes to a more manageable number.
 |Federated Project | Federated Project allows multiple SymetryML projects to form a _federation_ that leverage each individual projects so that they all work together as if they were one single project. That is from the perspective of each individual project they can all build the same models or compute the same exploration metrics and all of this is accomplished without sharing any data. For more information please consult the <<about-federated-projects, Federated Project Section.>>
 |===================
@@ -747,7 +747,7 @@ New with SymetryML 4.2 is the ability to create 'Partitioned Projects'. Partitio
 [[about-hashtrick-projects]]
 === About Hashtrick Projects
 
-Also new with SymetryML 4.2 is the ability to create 'Hashtrick Projects'. Use these type of project when your projet have many categorical attributes. When using such project the number of attributes / features will be reduced using the hashtrick. Note that you might need to experiments in order to find the optimal _bucket size_. Please refer to <<sample-requestresponse-hashtrick>> for an sample REST request / response.
+Also new with SymetryML 4.2 is the ability to create 'Hashtrick Projects'. Use this type of project when your data have many categorical attributes. When using such project the number of attributes / features will be reduced using the hashtrick. Note that you might need to experiments in order to find the optimal _bucket size_. Please refer to <<sample-requestresponse-hashtrick>> for an sample REST request / response.
 
 
 [[about-sequence-projects]]
@@ -766,7 +766,7 @@ For more information on __ngrams__, order, and level, see https://en.wikipedia.o
 [[about-federated-projects]]
 === About Federated Projects
 
-New with version 5.0 of SymetryML is the capabilities to allows multiple SymetryProject - possibly on different sites / geographical locations / different business units - to synchronize with each other in order to leverage each others data without sharing the actual data. This functionality is called `Federated Learning`. A federated project act exactly the same as any other project in terms of how you build model or explore the data. The only difference is how you create them. For more details about the lifecycle of federated project please consult the <<fedml-api>> section.
+New with version 5.0 of SymetryML is the capabilities to allows multiple SymetryML projects - possibly on different sites / geographical locations / different business units - to synchronize with each other in order to leverage each others data without sharing the actual data. This functionality is called `Federated Learning`. A federated project act exactly the same as any other project in terms of how you build model or explore the data. The only difference is how you create them. For more details about the lifecycle of federated project please consult the <<fedml-api>> section.
 
 
 [[about-timeseries-expansion]]
@@ -788,7 +788,7 @@ POST /symetry/rest/{cid}/projects?pid={new-project-id} [body=KSVSMap]
 [[create-new-symetryml-body]]
 ==== Create New SymetryML project Body
 
-The body of the request consist of a key/value map. It is optional and depends on the type of project. Please refer to the following table that describes mandatory parameters for the different type of projects. Also refer to <<ksvsmap-json>> for detail on the request body json datastructure.
+The body of the request consist of a key/value map. It is optional and depends on the type of project. Please refer to the following table that describes mandatory parameters for the different type of projects. Also refer to <<ksvsmap-json>> for detail on the request body json data structure.
 
 [[create-project-parameters]]
 .Extra Optional Parameters For All Projects
@@ -837,7 +837,7 @@ The following table list mandatory parameters for sequence and partitioned proje
 [width="100%",cols="<25%,<75%",options="header",]
 |=================================
 |Type |Description
-|*cpu* | Cpu based project, this is the default value
+|*cpu* | CPU based project, this is the default value
 |*gpu* | GPU based project
 |*sequence* | Sequence project, see <<about-sequence-projects>>
 |*partition* | Partitioned project, see <<about-partitioned-projects>>
@@ -939,7 +939,7 @@ GET /symetry/rest/{cid}/projects/{pid}/save
 [[project-freeze]]
 === Freezing a SymetryML Project
 
-This REST endpoint _freeze_ a Symetry Project, that is it block it from being able to be updated. Pushing data to a freezed project will raise an Exception and the data will not be processed.
+This REST endpoint _freeze_ a Symetry Project, that is it block it from being able to be updated. Pushing data to a frozen project will raise an Exception and the data will not be processed.
 
 [[project-freeze-url]]
 ==== URL
@@ -962,7 +962,7 @@ GET /symetry/rest/{cid}/projects/{pid}/freeze
 [[project-unfreeze]]
 === Unfreezing a SymetryML Project
 
-This REST endpoint does the reverse of <<project-freeze>>. If the project was not frozed it does nothing.
+This REST endpoint does the reverse of <<project-freeze>>. If the project was not frozen it does nothing.
 
 [[project-unfreeze-url]]
 ==== URL
@@ -1207,7 +1207,7 @@ This REST API function call retrieves information about a single SymetryML proje
 |*loaded*| Specifies if a project is loaded in memory or not
 |*persisted*| Specifies if a project is persisted or not
 | *streams* | List of streams that belong to that project
-| *partitionColumn* | For Partitionned Projects, this is the column to use to partition
+| *partitionColumn* | For Partitioned Projects, this is the column to use to partition
 the project
 | *autoSave* | Whether or not this project is autosaved.
 | *type* | The type of this project
@@ -1218,7 +1218,7 @@ the project
 !=============
 ! Key  !Description
 ! *fusion_fetch_error* ! Error string from the last time a fusion project fetched data from its cells.
-! *sml_project_is_freeze* ! Describe if this project is in the frozen state, that it is not possible for it to process new incomming data.
+! *sml_project_is_freeze* ! Describe if this project is in the frozen state, that it is not possible for it to process new incoming data.
 ! *automl_project_is_automl* ! Specify is this project use autoML
 ! *automl_setup_done* !  When using autoML, this boolean key specify if the auto ml 'warm up' is complete.
 ! *sml_project_power_column* !  Needed for power transformation model. Consult <<model-power-regression>> for details.
@@ -1336,7 +1336,7 @@ Job Response:
 SymetryML projects support streaming data. The streaming capabilities is encompassed in 2 major functionalities:
 
 1. Using the <<learn-new-data-incremental-update>> or <<forgetting-data-decremental-update>> by providing a <<dataframe-json>> as the request body.
-2. Using the <<stream-api>> to create stream data source that automatically push streaming data into your SymetryML project. Use this API to managage connections to streaming server solution such as Apache Kafka.
+2. Using the <<stream-api>> to create stream data source that automatically push streaming data into your SymetryML project. Use this API to manage connections to streaming server solution such as Apache Kafka.
 
 The following sub-sections will describe the _learn_ and _forget_ streaming API.
 
@@ -1494,7 +1494,7 @@ In the current implementation, under the hood the federation service uses many A
 * A Federation has an AWS SNS topic that allows fanout messages to be sent to multiple SQS queues.
 * Nodes in the federation use message to the SNS topic to communicate with other nodes
 * SNS messages are lightweight and contain pointers to Amazon S3 files that are used to temporarily store message content.
-* AWS STS credentials are used to allow other users to access an user's file on S3.
+* AWS STS credentials are used to allow other users to access a user's file on S3.
 * The following figure illustrates this:
 
 [[id-fedml-aws-integration]]
@@ -1516,7 +1516,7 @@ In order to join a federation one must: +
 
 1. *Make sure that your clock is correctly synched* using a _ntp_ service or something similar. If a computer's clock, in a federation, is not correctly synched it will have problems receiving messages from other nodes as the service will ignore many messages because of the discrepancy between the time a message was sent and the internal clock of the computer receiving the message. Those errors could be seen using the <<fedml-api-get-error-log>> rest endpoint.
 
-2. Receive `one-time encrypted federation info` along with the password to decrypt the message. This can be done over email, Skype or any other means that allows transfering some base64 encrypted text. The federation administrator can get this encrypted federation info using the <<fedml-api-get-encrypted>> rest endpoint
+2. Receive `one-time encrypted federation info` along with the password to decrypt the message. This can be done over email, Skype or any other means that allows transferring some base64 encrypted text. The federation administrator can get this encrypted federation info using the <<fedml-api-get-encrypted>> rest endpoint
 
 3. Invoke the rest point to join the federation <<fedml-api-join>> with the encrypted message and the password received from the federation admin. This message is also to be encrypted using the user `secret key`.
 
@@ -1642,7 +1642,7 @@ Response:
 [[fedml-api-get-info]]
 === Federated Learning Get Federation Info
 
-This rest call returns the information about the federation. The information is returned encrypted with the user secret key, that is the symetryml user key.
+This rest call returns the information about the federation. The information is returned encrypted with the user secret key, that is the SymetryML user key.
 
 [[url-fedml-gi]]
 ==== URL
@@ -1747,7 +1747,7 @@ Response:
 [[fedml-api-get-encrypted-rez]]
 ==== Decrypted Message Example:
 
-Once decrypted the Federation info will contains infomation like in the following example. This is basically a hashap with a few key/ value pair. These key value pairs must be used when joining a federation. See <<fedml-api-join-required>> for details.
+Once decrypted the Federation info will contains information like in the following example. This is basically a map with a few key/ value pair. These key value pairs must be used when joining a federation. See <<fedml-api-join-required>> for details.
 ....
 Decrypted JSON:
 {
@@ -1883,10 +1883,10 @@ GET /symetry/rest/{cid}/fedml/{pid}/startPulse
 [[fedml-api-change-schedule]]
 === Federated Learning: Change Schedule
 
-This rest-endpoint can only be executed by the Federation Admininistrator. it allows to change
+This rest-endpoint can only be executed by the Federation Administrator. it allows to change
 the synchronization schedule - that is how often peers in the federation synchronize with other peers.
 
-The <<projectinfo-json>> returned by the <<symetryml-project-information-about-one-project>> rest call contains information about wheather or not a project is the federation administrator. This information is present in the `param` map field under the `fed_is_admin` key.
+The <<projectinfo-json>> returned by the <<symetryml-project-information-about-one-project>> rest call contains information about whether or not a project is the federation administrator. This information is present in the `param` map field under the `fed_is_admin` key.
 
 [[fedml-api-change-schedule-url]]
 ==== URL
@@ -2101,7 +2101,7 @@ GET url="http://charm:8080/symetry/rest/c1/jobs/4
 [[about-fusion]]
 === About Fusion Projects
 
-Fusion Project allows to handle data coming from a stream with very high throughput. It is possible to scale the system to handle millions of rows / tuples per seconds. SymetryML Fusion projects do not process any data per say, instead they rely on other projects (called _cell projects_) to process streaming data in parallel. This is shown here:
+Fusion Project allows to handle data coming from a stream with very high throughput. It is possible to scale the system to handle millions of rows / tuples per seconds. SymetryML Fusion projects do not process any data per say, instead they are reliant on other projects (called _cell projects_) to process streaming data in parallel. This is shown here:
 
 [[id-fusion-3nodes]]
 image::fusion-1.png[height=400, align="center", title='Example of 3 Cells Fusion Project']
@@ -2735,9 +2735,9 @@ For each features / attributes for which histogram are requested a <<mlcontext-j
 | `hist.bins` | Required | Number of bins in the histogram
 | `hist.max` | Optional | Minimum value of the histogram on the x axis
 | `hist.min` | Optional | Maximum value of the histogram on the x axis
-| `hist.is.normalized` | Optional | normalize the histogram in percentage insttead of using absolute value.
+| `hist.is.normalized` | Optional | normalize the histogram in percentage instead of using absolute value.
 | `hist.use.subsampling` | Optional - Default is true | A boolean that specify to use a subsample of the data to compute histogram. This is done so that computation is more efficient. If one need the full histogram pass false.
-|`hist.use.random` | Optional | Use random sample when used in conjonction with `hist.use.subsampling`.
+|`hist.use.random` | Optional | Use random sample when used in conjunction with `hist.use.subsampling`.
 |===========================================================================================================================
 
 
@@ -2882,7 +2882,7 @@ In order to use the Online random forest additional parameters must be specified
 |===================
 |HyperParameter | Description
 | `rf_num_classes`    | mandatory for classifier, specify number of classes, *default:2*
-| `rf_features`     | list of columns to use for the Random Forest. If nothing is specifying then all continuous and binary attributes will be used, beside the target. Values are to be separated by coolon ':'.
+| `rf_features`     | list of columns to use for the Random Forest. If nothing is specifying then all continuous and binary attributes will be used, beside the target. Values are to be separated by colon ':'.
 | `rf_always_split`     | control if split should occurs when a node contains only examples of one class, default is false, should be true for anomaly detection, *default:false*
 | `rf_num_trees`      | number of trees in the forest, *default:10*
 | `rf_step`      | Gradient step. *default:1*
@@ -2917,7 +2917,7 @@ Response:
 ==== About Kaplan Meier Model
 
 
-Kaplan Meier (KM) requires three additional parameters to be specified when creating a SymetryProject.
+Kaplan Meier (KM) requires three additional parameters to be specified when creating a SymetryML project.
 Please consult the <<create-new-symetryml-project>> for details.
 
 
@@ -3188,7 +3188,7 @@ Job Response:
 
 Markov Chain Models and Hidden Markov Models are built differently. First, the project must be marked as a “sequence” project. After some data is learned, you can build Markov Chains, Hidden Markov Models, or both. These types of models have input attributes only; they do not have a target.
 
-For Markov Chains, you input attributes to specify the sequence attributes to use. For Hidden Markov Model, you also specify the hidden state that must be categorical. The Observed state can be continuous or categorical. If it's continuous normal distribution will be assumed, mean and standard deviation of the data is used.
+For Markov Chains, you input attributes to specify the sequence attributes to use. For Hidden Markov Model, you also specify the hidden state that must be categorical. The Observed state can be continuous or categorical. If it is acontinuous attribute, normal distribution will be assumed, mean and standard deviation of the data is used.
 
 [[model-information]]
 === Model Information
@@ -3922,7 +3922,7 @@ The best scoring target is also returned in the ‘res’ key.
 *seq.like* = contains the likelihood of the input sequence
 |*Hidden Markov Model* |seq = sequence of hidden states
 |*Random Forest Classifier*| -*res*, the class id with the highest probability. The probability for each classes is also returned. For a model with 3 classes their ids would be [0, 1, 2].
-|*Kaplan Meier* | Prediciton is not defined for Kaplan Meier model. Predict should not be called on models of type KM.
+|*Kaplan Meier* | Prediction is not defined for Kaplan Meier model. Predict should not be called on models of type KM.
 |==================================================================================================================================================================================
 
 [[data-source-api]]
@@ -3962,7 +3962,7 @@ SymetryML supports various types of data sources:
 ** 3.0.0
 * SymetryML data source plugins
 * JDBC
-* Local Data Source, that is allows to browse the local file system of the jetty web server with same priviledges as the user running the Jetty web server.
+* Local Data Source, that is allows to browse the local file system of the jetty web server with same privileges as the user running the Jetty web server.
 
 To use a data source, create a JSON data structure described in <<dsinfo-json>> that contains the fields in <<dsinfo-fields-table>> table.
 
@@ -4715,7 +4715,7 @@ Using the current and maximum fields, you can compute the percentage of the job 
 [width="100%",cols="<25%,<25%,<50%",options="header",]
 |====================
 |HTTP Status Code |HTTP Status Message |Description
-|200 |OK |DataFrame that contains a sample of the predictions (up to 128 lines). Because Amazon files can be very large, it is not possible to return the prediction result file in its entirety within a REST call. Use your favorite tool to fetch the prediction results from the data source (S3 or SFTP). +
+|200 |OK |DataFrame that contains a sample of the predictions (up to 128 lines). Because Amazon files can be very large, it is not possible to return the prediction result file in its entirety within a REST call. Use your favourite tool to fetch the prediction results from the data source (S3 or SFTP). +
 The prediction result file contains all the original file columns, plus the additional prediction column for each row. Any additional columns depend on the type of model used to make the predictions.
 |202 |ACCEPTED |Job is not finished. Includes a JobInfo entity. For more information, see the section <<jobinfo-json>> +
 Using the current and maximum fields, it is possible to compute the percentage of the job that was accomplished so far. "Maximum" refers to the size of the file to process and contains the approximate number of bytes processed by the job.
@@ -4725,11 +4725,11 @@ Using the current and maximum fields, it is possible to compute the percentage o
 [[dslog]]
 == Project Data Source Logs
 
-This functionality allows to get report metrics on the various data sources that were processed by a SymetryML project. Data Sources logs can be requested as well as the logs about the symetryML streaming API <<learn-new-data-incremental-update>> and <<forgetting-data-decremental-update>>.
+This functionality allows to get report metrics on the various data sources that were processed by a SymetryML project. Data Sources logs can be requested as well as the logs about the SymetryML streaming API <<learn-new-data-incremental-update>> and <<forgetting-data-decremental-update>>.
 
 === Data Source Log Information
 
-The data source log contains information about each data source that was processed (learn / forget) by a SymetryProject. It also contains other _meta information_ about each invocation:
+The data source log contains information about each data source that was processed (learn / forget) by a SymetryML project. It also contains other _meta information_ about each invocation:
 
 [[ds-log-table-1]]
 .DS Log Keys Table
@@ -4778,7 +4778,7 @@ The following table lists what information is returned for the learn / forget lo
 | *client.request.reponse.code* | HTTP Response code (e.g. 200, 4xx, etc)
 | *client.request.df.attributes.names* | DataFrame attributes names
 | *client.request.df.attributes.types* | DataFrame attributes types
-| client.request.process.time | Total process time accross all invocations
+| client.request.process.time | Total process time across all invocations
 | client.request.count | Number of times such Dataframe were pushed via the learn or forget rest endpoint
 | client.request.df.attributes.numrows.total | Total number of rows processed so far
 |==================
@@ -5359,9 +5359,9 @@ Response:
 
 SymetryML *Select Model*  is a feature selection functionality. It allows to automatically select the best features
 for a given model algorithm and it leverages SymetryML unique capabilities to build different predictive model quickly.
-The functionality basically build various model each with differents input attributes using some heuristics. It then
-compute a score for them using out of sample data and will keep the best one. The following table describe the
-heuristics available:
+The functionality basically build various model each with different input attributes using some heuristics. It then
+compute a score for them using out of sample data and will keep the best one. The following table describes the
+available heuristics:
 
 [[select-heuristic]]
 ==== Select Heuristic
@@ -6348,7 +6348,7 @@ ModelInfo : {
         "type" : "KSVSMap"
     },
     "creationDate" : "number"
-    "extra": "Object" // For MLR and Kaplan Meier models contains additional info. The 'object' is effectivelly a map where keys are strings and value are Dataframe see "DataFrame JSON" section earlier.
+    "extra": "Object" // For MLR and Kaplan Meier models contains additional info. The 'object' is effectively a map where keys are strings and value are Dataframe see "DataFrame JSON" section earlier.
 }
 ....
 
