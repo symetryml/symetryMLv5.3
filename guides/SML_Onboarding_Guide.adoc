@@ -117,7 +117,8 @@ The <<SML_Installation_Guide.adoc#, Symetry Installation Guide>> will guide you 
 [[symetryml-examples]]
 ==== SymetryML Examples
 
-The following URL contains various tutorials sample code link:../../examples[Symetry ML Examples]
+The following URL contains various tutorials sample code link:../examples[Symetry ML Examples]
+
 
 [[symetryml-admin-users-guide]]
 ==== SymetryML Admin Users Guide.
